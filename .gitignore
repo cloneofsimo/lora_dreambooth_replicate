@@ -1,0 +1,7 @@
+cog_class_data
+cog_instance_data
+*-cache
+__debug*
+__pycache__
+checkpoints
+.cog
