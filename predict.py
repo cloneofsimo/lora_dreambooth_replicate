@@ -44,49 +44,49 @@ class Predictor(BasePredictor):
             description="An optional ZIP file containing the training data of class images. This corresponds to `class_prompt` above, also with the purpose of keeping the model generalizable. By default, the pretrained stable-diffusion model will generate N images (determined by the `num_class_images` you set) based on the `class_prompt` provided. But to save time or to have your preferred specific set of `class_data`, you can also provide them in a ZIP file.",
             default=None,
         ),
-        num_class_images: int = Input(
-            description="Minimal class images for prior preservation loss. If not enough images are provided in class_data, additional images will be"
-            " sampled with class_prompt.",
-            default=50,
-        ),
-        save_sample_prompt: str = Input(
-            description="The prompt used to generate sample outputs to save.",
-            default=None,
-        ),
-        save_sample_negative_prompt: str = Input(
-            description="The negative prompt used to generate sample outputs to save.",
-            default=None,
-        ),
-        n_save_sample: int = Input(
-            description="The number of samples to save.",
-            default=4,
-        ),
-        save_guidance_scale: float = Input(
-            description="CFG for save sample.",
-            default=7.5,
-        ),
-        save_infer_steps: int = Input(
-            description="The number of inference steps for save sample.",
-            default=50,
-        ),
-        with_prior_preservation: bool = Input(
-            description="Flag to add prior preservation loss.",
-            default=True,
-        ),
-        prior_loss_weight: float = Input(
-            description="Weight of prior preservation loss.",
-            default=1.0,
-        ),
+        # num_class_images: int = Input(
+        #     description="Minimal class images for prior preservation loss. If not enough images are provided in class_data, additional images will be"
+        #     " sampled with class_prompt.",
+        #     default=50,
+        # ),
+        # save_sample_prompt: str = Input(
+        #     description="The prompt used to generate sample outputs to save.",
+        #     default=None,
+        # ),
+        # save_sample_negative_prompt: str = Input(
+        #     description="The negative prompt used to generate sample outputs to save.",
+        #     default=None,
+        # ),
+        # n_save_sample: int = Input(
+        #     description="The number of samples to save.",
+        #     default=4,
+        # ),
+        # save_guidance_scale: float = Input(
+        #     description="CFG for save sample.",
+        #     default=7.5,
+        # ),
+        # save_infer_steps: int = Input(
+        #     description="The number of inference steps for save sample.",
+        #     default=50,
+        # ),
+        # with_prior_preservation: bool = Input(
+        #     description="Flag to add prior preservation loss.",
+        #     default=True,
+        # ),
+        # prior_loss_weight: float = Input(
+        #     description="Weight of prior preservation loss.",
+        #     default=1.0,
+        # ),
         seed: int = Input(description="A seed for reproducible training", default=1337),
         resolution: int = Input(
             description="The resolution for input images. All the images in the train/validation dataset will be resized to this"
             " resolution.",
             default=512,
         ),
-        center_crop: bool = Input(
-            description="Whether to center crop images before resizing to resolution",
-            default=False,
-        ),
+        # center_crop: bool = Input(
+        #     description="Whether to center crop images before resizing to resolution",
+        #     default=False,
+        # ),
         train_text_encoder: bool = Input(
             description="Whether to train the text encoder",
             default=True,
@@ -95,15 +95,15 @@ class Predictor(BasePredictor):
             description="Batch size (per device) for the training dataloader.",
             default=1,
         ),
-        sample_batch_size: int = Input(
-            description="Batch size (per device) for sampling images.",
-            default=4,
-        ),
-        num_train_epochs: int = Input(default=1),
-        max_train_steps: int = Input(
-            description="Total number of training steps to perform.  If provided, overrides num_train_epochs.",
-            default=2000,
-        ),
+        # sample_batch_size: int = Input(
+        #     description="Batch size (per device) for sampling images.",
+        #     default=4,
+        # ),
+        # num_train_epochs: int = Input(default=1),
+        # max_train_steps: int = Input(
+        #     description="Total number of training steps to perform.  If provided, overrides num_train_epochs.",
+        #     default=2000,
+        # ),
         gradient_accumulation_steps: int = Input(
             description="Number of updates steps to accumulate before performing a backward/update pass.",
             default=4,
@@ -136,10 +136,10 @@ class Predictor(BasePredictor):
             description="Whether or not to use 8-bit Adam from bitsandbytes.",
             default=False,
         ),
-        max_grad_norm: float = Input(
-            default=1.0,
-            description="Max gradient norm.",
-        ),
+        # max_grad_norm: float = Input(
+        #     default=1.0,
+        #     description="Max gradient norm.",
+        # ),
         clip_ti_decay: bool = Input(
             default=True,
             description="Whether or not to clip the TI decay to be between 0 and 1.",
@@ -196,10 +196,10 @@ class Predictor(BasePredictor):
             description="Number of steps for the warmup in the lr scheduler.",
             default=0,
         ),
-        mask_temperature: float = Input(
-            default=1.0,
-            description="The temperature for the mask.",
-        ),
+        # mask_temperature: float = Input(
+        #     default=1.0,
+        #     description="The temperature for the mask.",
+        # ),
         max_train_steps_ti: int = Input(
             default=500,
             description="The maximum number of training steps for the TI.",
@@ -224,18 +224,18 @@ class Predictor(BasePredictor):
             default=100,
             description="The number of steps between saving checkpoints.",
         ),
-        use_extended_lora: bool = Input(
-            default=False,
-            description="Whether or not to use the extended LORA loss.",
-        ),
+        # use_extended_lora: bool = Input(
+        #     default=False,
+        #     description="Whether or not to use the extended LORA loss.",
+        # ),
         use_face_segmentation_condition: bool = Input(
             default=True,
             description="Whether or not to use the face segmentation condition.",
         ),
-        use_mask_captioned_data: bool = Input(
-            default=False,
-            description="Whether or not to use the mask captioned data.",
-        ),
+        # use_mask_captioned_data: bool = Input(
+        #    default=False,
+        #    description="Whether or not to use the mask captioned data.",
+        # ),
         use_template: str = Input(
             default="object",
             description="The template to use for the inversion.",
