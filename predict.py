@@ -114,7 +114,7 @@ class Predictor(BasePredictor):
         ),
         scale_lr: bool = Input(
             description="Scale the learning rate by the number of GPUs, gradient accumulation steps, and batch size.",
-            default=False,
+            default=True,
         ),
         lr_scheduler: str = Input(
             description="The scheduler type to use",
@@ -165,7 +165,7 @@ class Predictor(BasePredictor):
             description="The tokens to use for the initializer. If not provided, will randomly initialize from gaussian N(0,0.017^2)",
         ),
         learning_rate_text: float = Input(
-            default=1e-4,
+            default=1e-5,
             description="The learning rate for the text encoder.",
         ),
         learning_rate_ti: float = Input(
@@ -173,7 +173,7 @@ class Predictor(BasePredictor):
             description="The learning rate for the TI.",
         ),
         learning_rate_unet: float = Input(
-            default=1e-5,
+            default=1e-3,
             description="The learning rate for the unet.",
         ),
         lora_rank: int = Input(
