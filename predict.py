@@ -173,7 +173,7 @@ class Predictor(BasePredictor):
             description="The learning rate for the TI.",
         ),
         learning_rate_unet: float = Input(
-            default=1e-3,
+            default=1e-4,
             description="The learning rate for the unet.",
         ),
         lora_rank: int = Input(
