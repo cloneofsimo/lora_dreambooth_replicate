@@ -12,6 +12,8 @@ from typing import Set
 
 from cog import BasePredictor, Input, Path
 from lora_diffusion.cli_lora_pti import train as lora_train
+from lora_diffusion.dataset import TEMPLATE_MAP
+
 from lora_diffusion import (
     UNET_DEFAULT_TARGET_REPLACE,
     TEXT_ENCODER_DEFAULT_TARGET_REPLACE,
@@ -239,6 +241,7 @@ class Predictor(BasePredictor):
         use_template: str = Input(
             default="object",
             description="The template to use for the inversion.",
+            choices=[k if k != 'null' else 'none' for k in TEMPLATE_MAP.keys()],
         ),
         weight_decay_lora: float = Input(
             default=0.001,
