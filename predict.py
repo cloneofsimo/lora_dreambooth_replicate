@@ -222,10 +222,10 @@ class Predictor(BasePredictor):
             default="<s1>|<s2>",
             description="The placeholder tokens to use for the initializer. If not provided, will use the first tokens of the data.",
         ),
-        save_steps: int = Input(
-            default=100,
-            description="The number of steps between saving checkpoints.",
-        ),
+        # save_steps: int = Input(
+        #     default=100,
+        #     description="The number of steps between saving checkpoints.",
+        # ),
         # use_extended_lora: bool = Input(
         #     default=False,
         #     description="Whether or not to use the extended LORA loss.",
@@ -241,7 +241,7 @@ class Predictor(BasePredictor):
         use_template: str = Input(
             default="object",
             description="The template to use for the inversion.",
-            choices=[k if k != 'null' else 'none' for k in TEMPLATE_MAP.keys()],
+            choices=[k if k != "null" else "none" for k in TEMPLATE_MAP.keys()],
         ),
         weight_decay_lora: float = Input(
             default=0.001,
@@ -361,7 +361,7 @@ class Predictor(BasePredictor):
             "perform_inversion": perform_inversion,
             "placeholder_token_at_data": placeholder_token_at_data,
             "placeholder_tokens": placeholder_tokens,
-            "save_steps": save_steps,
+            "save_steps": max_train_steps_tuning,
             # "use_extended_lora": use_extended_lora,
             "use_face_segmentation_condition": use_face_segmentation_condition,
             # "use_mask_captioned_data": use_mask_captioned_data,
@@ -379,9 +379,9 @@ class Predictor(BasePredictor):
         out_path = "output.zip"
 
         directory = Path(cog_output_dir)
-        with ZipFile(out_path, "w") as zip:
-            for file_path in directory.rglob("*"):
-                print(file_path)
-                zip.write(file_path, arcname=file_path.relative_to(directory))
+        # only return the last step
+        for file_path in directory.rglob("*"):
+            print(file_path)
+            if file_path.name == f'step_{max_train_steps_tuning}.safetensors':
+                return file_path
 
-        return Path(out_path)
